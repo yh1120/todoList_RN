@@ -14,6 +14,7 @@ const Input: React.FC<IInput> = ({
     <StyledInput
       width={width}
       placeholder={placeholder}
+      maxLength={50}
       autoCapitalize="none"
       autoCorrect={false}
       returnKeyType="done"
