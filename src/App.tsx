@@ -3,6 +3,8 @@ import { StatusBar } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './Styles/theme';
 import Input from './Components/Input';
+import IconButton from './Components/IconButton';
+import { images } from './Constants/Images';
 
 export default function App() {
   const [newTask, setNewTask] = useState('');
@@ -30,6 +32,10 @@ export default function App() {
           onChangeText={handleChangeText}
           onSubmitEditing={addTask}
         />
+        <IconButton type={images.uncompleted} />
+        <IconButton type={images.completed} />
+        <IconButton type={images.delete} />
+        <IconButton type={images.update} />
       </Container>
     </ThemeProvider>
   );
