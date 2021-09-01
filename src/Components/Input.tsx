@@ -13,6 +13,7 @@ const Input: React.FC<IInput> = ({
   return (
     <StyledInput
       width={width}
+      placeholder={placeholder}
       autoCapitalize="none"
       autoCorrect={false}
       returnKeyType="done"
@@ -24,7 +25,9 @@ const Input: React.FC<IInput> = ({
   );
 };
 
-const StyledInput = styled.TextInput`
+const StyledInput = styled.TextInput.attrs(({ theme }) => ({
+  placeholderTextColor: theme.main,
+}))`
   width: ${({ width }: { width: number }) => width - 40}px;
   height: 60px;
   margin: 3px 0;
