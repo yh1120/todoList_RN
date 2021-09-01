@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { DefaultTheme } from 'styled-components/native';
 import IconButton from './IconButton';
 import { images } from '../Constants';
 import { ITaskComponent } from '../Constants/Type';
+import Input from './Input';
 
-const Task: React.FC<ITaskComponent> = ({ item, deleteTask, toggleTask }) => {
-  return (
+const Task: React.FC<ITaskComponent> = ({
+  item,
+  deleteTask,
+  toggleTask,
+  updateTask,
+}) => {
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [text, setText] = useState<string>(item.content);
+  const handleUpdateButtonPress = () => {
+    setIsEditing(true);
+  };
+  const onSubmitEditing = () => {
+    if (isEditing) {
+      const editedTask = { ...item, content: text };
+      setIsEditing(false);
+      updateTask(editedTask);
+    }
+  };
+
+  return isEditing ? (
+    <Input
+      placeholder=""
+      value={text}
+      onChangeText={(text: string) => setText(text)}
+      onSubmitEditing={onSubmitEditing}
+    />
+  ) : (
     <Container>
       <IconButton
         type={item.ischecked ? images.completed : images.uncompleted}
@@ -14,7 +40,14 @@ const Task: React.FC<ITaskComponent> = ({ item, deleteTask, toggleTask }) => {
         ischecked={item.ischecked}
       />
       <Contents ischecked={item.ischecked}>{item.content}</Contents>
-      {!item.ischecked && <IconButton type={images.update} />}
+      {!item.ischecked && (
+        <IconButton
+          type={images.update}
+          id={item.id}
+          onPressOut={handleUpdateButtonPress}
+          ischecked={item.ischecked}
+        />
+      )}
       <IconButton
         type={images.delete}
         id={item.id}

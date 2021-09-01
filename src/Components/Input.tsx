@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
-import { IWidth, IInput } from '../Constants';
+import { IWidth, IInput, WIDTH } from '../Constants';
 
 const Input: React.FC<IInput> = ({
   placeholder,
@@ -9,7 +9,7 @@ const Input: React.FC<IInput> = ({
   onChangeText,
   onSubmitEditing,
 }) => {
-  const width = Dimensions.get('window').width;
+  const width = WIDTH;
   return (
     <StyledInput
       width={width}

@@ -27,4 +27,5 @@ export type ITaskComponent = {
   item: ITask;
   deleteTask: (id: number) => void;
   toggleTask: (id: number) => void;
+  updateTask: (item: ITask) => void;
 };

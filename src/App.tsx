@@ -3,10 +3,10 @@ import { Dimensions, FlatList, StatusBar, Text } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './Styles/theme';
 import { Input, Task } from './Components';
-import { IWidth, ITask } from './Constants';
+import { IWidth, ITask, WIDTH } from './Constants';
 
 export default function App() {
-  const width = Dimensions.get('window').width;
+  const width = WIDTH;
   const [newTask, setNewTask] = useState<string>('');
   const [tasks, setTasks] = useState<ITask[]>([
     {
@@ -68,6 +68,12 @@ export default function App() {
     );
   };
 
+  const updateTask = (item: ITask) => {
+    setTasks((prevTask) =>
+      prevTask.map((task: ITask) => (task.id === item.id ? item : task))
+    );
+  };
+
   const handleChangeText = (text: string) => {
     setNewTask(text);
   };
@@ -93,6 +99,7 @@ export default function App() {
               item={item}
               deleteTask={deleteTask}
               toggleTask={toggleTask}
+              updateTask={updateTask}
             />
           ))}
         </List>
