@@ -78,6 +78,10 @@ export default function App() {
     setNewTask(text);
   };
 
+  const onBlur = () => {
+    setNewTask('');
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -91,6 +95,7 @@ export default function App() {
           value={newTask}
           onChangeText={handleChangeText}
           onSubmitEditing={addTask}
+          onBlur={onBlur}
         />
         <List width={width}>
           {tasks.map((item) => (

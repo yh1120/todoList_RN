@@ -24,12 +24,20 @@ const Task: React.FC<ITaskComponent> = ({
     }
   };
 
+  const onBlur = () => {
+    if (isEditing) {
+      setIsEditing(false);
+      setText(item.content);
+    }
+  };
+
   return isEditing ? (
     <Input
       placeholder=""
       value={text}
       onChangeText={(text: string) => setText(text)}
       onSubmitEditing={onSubmitEditing}
+      onBlur={onBlur}
     />
   ) : (
     <Container>

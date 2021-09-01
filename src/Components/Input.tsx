@@ -8,6 +8,7 @@ const Input: React.FC<IInput> = ({
   value,
   onChangeText,
   onSubmitEditing,
+  onBlur,
 }) => {
   const width = WIDTH;
   return (
@@ -22,6 +23,7 @@ const Input: React.FC<IInput> = ({
       value={value}
       onChangeText={onChangeText}
       onSubmitEditing={onSubmitEditing}
+      onBlur={onBlur}
     />
   );
 };

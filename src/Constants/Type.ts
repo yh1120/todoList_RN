@@ -7,6 +7,7 @@ export type IInput = {
   value: string;
   onChangeText: (text: string) => void;
   onSubmitEditing: () => void;
+  onBlur: () => void;
 };
 
 export type ITask = {
