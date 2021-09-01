@@ -5,7 +5,6 @@ import { theme } from './Styles/theme';
 import { Input, Task } from './Components';
 import { IWidth, ITask, WIDTH } from './Constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AppLoading from 'expo';
 import { useEffect } from 'react';
 
 export default function App() {
