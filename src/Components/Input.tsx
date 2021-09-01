@@ -5,6 +5,22 @@ import { Dimensions } from 'react-native';
 interface IWidth {
   width: number;
 }
+interface IInput {
+  placeholder: string;
+}
+
+const Input = ({ placeholder }: IInput) => {
+  const width = Dimensions.get('window').width;
+  return (
+    <StyledInput
+      width={width}
+      autoCapitalize="none"
+      autoCorrect={false}
+      returnKeyType="done"
+      keyboardAppearance="dark"
+    />
+  );
+};
 
 const StyledInput = styled.TextInput`
   width: ${({ width }: { width: number }) => width - 40}px;
@@ -16,10 +32,5 @@ const StyledInput = styled.TextInput`
   font-size: 25px;
   color: ${({ theme }) => theme.text};
 `;
-
-const Input = () => {
-  const width = Dimensions.get('window').width;
-  return <StyledInput width={width} />;
-};
 
 export default Input;
