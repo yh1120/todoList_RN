@@ -7,9 +7,17 @@ interface IWidth {
 }
 interface IInput {
   placeholder: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  onSubmitEditing: () => void;
 }
 
-const Input = ({ placeholder }: IInput) => {
+const Input = ({
+  placeholder,
+  value,
+  onChangeText,
+  onSubmitEditing,
+}: IInput) => {
   const width = Dimensions.get('window').width;
   return (
     <StyledInput
@@ -18,6 +26,9 @@ const Input = ({ placeholder }: IInput) => {
       autoCorrect={false}
       returnKeyType="done"
       keyboardAppearance="dark"
+      value={value}
+      onChangeText={onChangeText}
+      onSubmitEditing={onSubmitEditing}
     />
   );
 };
