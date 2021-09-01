@@ -4,36 +4,29 @@ import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './Styles/theme';
 import { Input, Task } from './Components';
 import { IWidth, ITask, WIDTH } from './Constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppLoading from 'expo';
+import { useEffect } from 'react';
 
 export default function App() {
   const width = WIDTH;
+  const [isReady, setIsReady] = useState<boolean>(false);
   const [newTask, setNewTask] = useState<string>('');
-  const [tasks, setTasks] = useState<ITask[]>([
-    {
-      id: 1,
-      content: 'hello',
-      ischecked: false,
-      createdAt: '2021-05-26T11:51:05.097Z',
-    },
-    {
-      id: 2,
-      content: 'this',
-      ischecked: true,
-      createdAt: '2021-05-26T11:51:05.097Z',
-    },
-    {
-      id: 3,
-      content: 'is',
-      ischecked: false,
-      createdAt: '2021-05-26T11:51:05.097Z',
-    },
-    {
-      id: 4,
-      content: 'todolist',
-      ischecked: false,
-      createdAt: '2021-05-26T11:51:05.097Z',
-    },
-  ]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
+
+  const saveTasks = async (tasks: ITask[]) => {
+    try {
+      await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
+      setTasks(tasks);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const loadTasks = async () => {
+    const loadedTasks = await AsyncStorage.getItem('tasks');
+    setTasks(JSON.parse(loadedTasks || '[]'));
+  };
 
   const addTask = () => {
     const date = new Date();
@@ -43,35 +36,31 @@ export default function App() {
       }
       return accumulator;
     }, 0);
-    setTasks((prevTasks: ITask[]) =>
-      prevTasks.concat({
+    setNewTask('');
+    saveTasks(
+      tasks.concat({
         id: nextId + 1,
         content: newTask,
         ischecked: false,
         createdAt: date.toISOString(),
       })
     );
-    setNewTask('');
   };
 
   const deleteTask = (id: number) => {
-    setTasks((prevTask: ITask[]) =>
-      prevTask.filter((item: ITask) => item.id !== id)
-    );
+    saveTasks(tasks.filter((item: ITask) => item.id !== id));
   };
 
   const toggleTask = (id: number) => {
-    setTasks((prevTask) =>
-      prevTask.map((task: ITask) =>
+    saveTasks(
+      tasks.map((task: ITask) =>
         task.id === id ? { ...task, ischecked: !task.ischecked } : task
       )
     );
   };
 
   const updateTask = (item: ITask) => {
-    setTasks((prevTask) =>
-      prevTask.map((task: ITask) => (task.id === item.id ? item : task))
-    );
+    saveTasks(tasks.map((task: ITask) => (task.id === item.id ? item : task)));
   };
 
   const handleChangeText = (text: string) => {
@@ -81,6 +70,10 @@ export default function App() {
   const onBlur = () => {
     setNewTask('');
   };
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
