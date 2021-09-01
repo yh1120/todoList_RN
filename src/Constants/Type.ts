@@ -10,9 +10,21 @@ export type IInput = {
 };
 
 export type ITask = {
-  text: string;
+  id: number;
+  content: string;
+  ischecked: boolean;
+  createdAt: string;
 };
 
 export type IIconButton = {
   type: any;
+  id: number;
+  onPressOut: (id: number) => void;
+  ischecked: boolean;
+};
+
+export type ITaskComponent = {
+  item: ITask;
+  deleteTask: (id: number) => void;
+  toggleTask: (id: number) => void;
 };

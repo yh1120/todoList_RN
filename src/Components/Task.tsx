@@ -1,15 +1,26 @@
 import React from 'react';
-import styled from 'styled-components/native';
-import { IconButton } from 'Components';
-import { images, ITask } from 'Constants';
+import styled, { DefaultTheme } from 'styled-components/native';
+import IconButton from './IconButton';
+import { images } from '../Constants';
+import { ITaskComponent } from '../Constants/Type';
 
-const Task: React.FC<ITask> = ({ text }) => {
+const Task: React.FC<ITaskComponent> = ({ item, deleteTask, toggleTask }) => {
   return (
     <Container>
-      <IconButton type={images.uncompleted} />
-      <Contents>{text}</Contents>
-      <IconButton type={images.update} />
-      <IconButton type={images.delete} />
+      <IconButton
+        type={item.ischecked ? images.completed : images.uncompleted}
+        id={item.id}
+        onPressOut={toggleTask}
+        ischecked={item.ischecked}
+      />
+      <Contents ischecked={item.ischecked}>{item.content}</Contents>
+      {!item.ischecked && <IconButton type={images.update} />}
+      <IconButton
+        type={images.delete}
+        id={item.id}
+        onPressOut={deleteTask}
+        ischecked={item.ischecked}
+      />
     </Container>
   );
 };
@@ -26,7 +37,15 @@ const Container = styled.View`
 const Contents = styled.Text`
   flex: 1;
   font-size: 24px;
-  color: ${({ theme }) => theme.text};
+  color: ${({
+    theme,
+    ischecked,
+  }: {
+    theme: DefaultTheme;
+    ischecked: boolean;
+  }) => (ischecked ? theme.done : theme.text)};
+  text-decoration-line: ${({ ischecked }) =>
+    ischecked ? 'line-through' : 'none'};
 `;
 
 export default Task;

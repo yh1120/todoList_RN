@@ -1,17 +1,71 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'react-native';
+import { Dimensions, FlatList, StatusBar, Text } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './Styles/theme';
-import Input from './Components/Input';
-import IconButton from './Components/IconButton';
-import { images } from './Constants/Images';
+import { Input, Task } from './Components';
+import { IWidth, ITask } from './Constants';
 
 export default function App() {
-  const [newTask, setNewTask] = useState('');
+  const width = Dimensions.get('window').width;
+  const [newTask, setNewTask] = useState<string>('');
+  const [tasks, setTasks] = useState<ITask[]>([
+    {
+      id: 1,
+      content: 'hello',
+      ischecked: false,
+      createdAt: '2021-05-26T11:51:05.097Z',
+    },
+    {
+      id: 2,
+      content: 'this',
+      ischecked: true,
+      createdAt: '2021-05-26T11:51:05.097Z',
+    },
+    {
+      id: 3,
+      content: 'is',
+      ischecked: false,
+      createdAt: '2021-05-26T11:51:05.097Z',
+    },
+    {
+      id: 4,
+      content: 'todolist',
+      ischecked: false,
+      createdAt: '2021-05-26T11:51:05.097Z',
+    },
+  ]);
 
   const addTask = () => {
-    alert(`Add: ${newTask}`);
+    const date = new Date();
+    const nextId = tasks.reduce((accumulator: number, currentValue: ITask) => {
+      if (currentValue.id >= accumulator) {
+        return currentValue.id;
+      }
+      return accumulator;
+    }, 0);
+    setTasks((prevTasks: ITask[]) =>
+      prevTasks.concat({
+        id: nextId + 1,
+        content: newTask,
+        ischecked: false,
+        createdAt: date.toISOString(),
+      })
+    );
     setNewTask('');
+  };
+
+  const deleteTask = (id: number) => {
+    setTasks((prevTask: ITask[]) =>
+      prevTask.filter((item: ITask) => item.id !== id)
+    );
+  };
+
+  const toggleTask = (id: number) => {
+    setTasks((prevTask) =>
+      prevTask.map((task: ITask) =>
+        task.id === id ? { ...task, ischecked: !task.ischecked } : task
+      )
+    );
   };
 
   const handleChangeText = (text: string) => {
@@ -32,10 +86,16 @@ export default function App() {
           onChangeText={handleChangeText}
           onSubmitEditing={addTask}
         />
-        <IconButton type={images.uncompleted} />
-        <IconButton type={images.completed} />
-        <IconButton type={images.delete} />
-        <IconButton type={images.update} />
+        <List width={width}>
+          {tasks.map((item) => (
+            <Task
+              key={item.id}
+              item={item}
+              deleteTask={deleteTask}
+              toggleTask={toggleTask}
+            />
+          ))}
+        </List>
       </Container>
     </ThemeProvider>
   );
@@ -54,4 +114,9 @@ const Title = styled.Text`
   color: ${({ theme }) => theme.main};
   align-self: flex-start;
   margin: 0px 20px;
+`;
+
+const List = styled.ScrollView`
+  flex: 1;
+  width: ${({ width }: IWidth) => width - 40}px;
 `;
