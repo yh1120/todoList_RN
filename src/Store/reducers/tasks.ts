@@ -15,30 +15,52 @@ const initialState: TaskState = {
 const tasks = (state: TaskState = initialState, action: TasksAction) => {
   switch (action.type) {
     case ADD_TASK: {
-      return state.todoList.concat({
+      const temp = state.todoList.concat({
         id: action.payload.id,
         content: action.payload.content,
         ischecked: false,
         createdAt: newDate(),
       });
+      return {
+        count: state.todoList.length + 1,
+        todoList: temp,
+      };
     }
     case TOGGLE_TASK: {
-      return state.todoList.map((task: ITask) =>
-        task.id === action.payload.id
+      const temp = state.todoList.map((task: ITask) =>
+        task.id === action.payload
           ? { ...task, ischecked: !task.ischecked }
           : task
       );
+      return {
+        count: state.count,
+        todoList: temp,
+      };
     }
     case DELETE_TASK: {
-      return state.todoList.filter((task: ITask) => {
-        task.id !== action.payload.id;
+      const temp = state.todoList.filter((task: ITask) => {
+        if (task.id !== action.payload) {
+          return task;
+        }
       });
+      return {
+        count: state.count - 1,
+        todoList: temp,
+      };
     }
     case UPDATE_TASK: {
-      return state.todoList.map((task: ITask) =>
-        task.id === action.payload.item.id ? action.payload.item : task
-      );
+      const temp = state.todoList.map((task: ITask) => {
+        const id: number = action.payload.id;
+        const content: string = action.payload.content;
+        return task.id === id ? { ...task, content: content } : task;
+      });
+      return {
+        count: state.count,
+        todoList: temp,
+      };
     }
+    default:
+      return state;
   }
 };
 

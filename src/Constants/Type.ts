@@ -1,3 +1,10 @@
+import {
+  createTask,
+  removeTask,
+  toggleTask,
+  updateTask,
+} from '../Store/actions/tasks';
+
 export type IWidth = {
   width: number;
 };
@@ -30,3 +37,20 @@ export type ITaskComponent = {
   toggleTask: (id: number) => void;
   updateTask: (item: ITask) => void;
 };
+////////////////////////////////////
+
+export type AddPayload = {
+  id: number;
+  content: string;
+};
+
+export type TaskState = {
+  count: number;
+  todoList: ITask[];
+};
+
+export type TasksAction =
+  | ReturnType<typeof createTask>
+  | ReturnType<typeof toggleTask>
+  | ReturnType<typeof removeTask>
+  | ReturnType<typeof updateTask>;
