@@ -18,7 +18,7 @@
 
  ### 설치
 
- `yarn install`
+ `yarn`
 
  ### 실행
 
