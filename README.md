@@ -3,11 +3,10 @@
 ## 📌 프로젝트 소개
 
  ###  페이워크 기업 과제
-> React-redux를 활용한 Todo List 만들기
-
-![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/56836077/131775112-05a44129-bce1-4d81-b0fe-4add6ba34f59.gif)
-
-
+> React-redux를 활용한 Todo List를 만듭니다.
+> TypeScript를 사용하여 유지보수를 용이하게 합니다.
+> React Native를 기반으로 만들어 ios, android 앱에 맞춥니다.
+> Task에 생성, 수정, 완료, 삭제 기능을 넣습니다.
 
  <br>
 
@@ -60,6 +59,8 @@
  - 상태를 한 곳에서 모아 관리해주며 action을 통해 다양한 기능을 가져옵니다.
 
 
+## 실행 
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/56836077/131775112-05a44129-bce1-4d81-b0fe-4add6ba34f59.gif)
 
 
 
