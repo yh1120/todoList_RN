@@ -6,7 +6,8 @@
 > React-redux를 활용한 Todo List를 만듭니다.  
 > TypeScript를 사용하여 유지보수를 용이하게 합니다.  
 > React Native를 기반으로 만들어 ios, android 앱에 맞춥니다.  
-> Task에 생성, 수정, 완료, 삭제 기능을 넣습니다.
+> Task에 생성, 수정, 완료, 삭제 기능을 넣습니다.  
+[TodoList](https://todolist-rn.netlify.app/)
 
  <br>
 
