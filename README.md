@@ -22,10 +22,10 @@
 
  ### 실행
 
- `yarn start`
- `i` => ios 실행
- `a` => android 실행
- `w` => web 실행!
+ `yarn start`  
+ `i` => ios 실행  
+ `a` => android 실행  
+ `w` => web 실행  
 
  
  <br>
@@ -53,6 +53,11 @@
  `RemoveButton`
  
  - 삭제 버튼을 누르면 해당 Task가 삭제됩니다.
+
+
+ `Redux`
+ 
+ - 상태를 한 곳에서 모아 관리해주며 action을 통해 다양한 기능을 가져옵니다.
 
 
 
