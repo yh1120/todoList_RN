@@ -5,7 +5,7 @@
  ###  페이워크 기업 과제
 > React-redux를 활용한 Todo List 만들기
 
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/56836077/131774098-236d33bf-b510-4089-9f4c-b6f6defae653.gif)
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/56836077/131775112-05a44129-bce1-4d81-b0fe-4add6ba34f59.gif)
 
 
 
