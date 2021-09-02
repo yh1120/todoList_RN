@@ -12,14 +12,26 @@ export default function Wrap() {
 
   const dispatch = useDispatch();
 
+  /*
+   ** createTask: content를 함는 새로운 Task 생성
+   */
+
   const handleCreate = () => {
     dispatch(createTask(newTask));
     setNewTask('');
   };
 
+  /*
+   ** Input의 문자열이 변화할때마다 감지하고 저장
+   */
+
   const handleChangeText = (text: string) => {
     setNewTask(text);
   };
+
+  /*
+   ** Input 입력 중 Input 외 선택시 Input 취소
+   */
 
   const onBlur = () => {
     setNewTask('');

@@ -13,9 +13,18 @@ const Task: React.FC<ITaskComponent> = ({
 }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [text, setText] = useState<string>(item.content);
+
+  /*
+   ** UpdateButton 클릭시 isEditing state 변화, Input Component 활성화
+   */
   const handleUpdateButtonPress = () => {
     setIsEditing(true);
   };
+
+  /*
+   ** Input Component 수정 완료시 내용 수정
+   */
+
   const onSubmitEditing = () => {
     if (isEditing) {
       const editedTask = { ...item, content: text };
@@ -23,6 +32,10 @@ const Task: React.FC<ITaskComponent> = ({
       updateTask(editedTask);
     }
   };
+
+  /*
+   ** Input 입력 중 Input 외 선택시 Input 취소
+   */
 
   const onBlur = () => {
     if (isEditing) {

@@ -12,6 +12,11 @@ const initialState: TaskState = {
   todoList: [],
 };
 
+/*
+ ** action.type에 따른 실행 함수 작성.
+ ** 각각 생성, 토글, 삭제, 수정된 TaskState를 반환한다.
+ */
+
 const tasks = (state: TaskState = initialState, action: TasksAction) => {
   switch (action.type) {
     case ADD_TASK: {

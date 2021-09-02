@@ -3,6 +3,10 @@ import { ADD_TASK, TOGGLE_TASK, DELETE_TASK, UPDATE_TASK } from './types';
 
 let nextId = 1;
 
+/*
+ ** reducer에 전달할 action의 type, payload 생성
+ */
+
 export const createTask = (content: string) => ({
   type: ADD_TASK,
   payload: {
