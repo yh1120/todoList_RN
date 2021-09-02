@@ -37,7 +37,6 @@ export type ITaskComponent = {
   toggleTask: (id: number) => void;
   updateTask: (item: ITask) => void;
 };
-////////////////////////////////////
 
 export type AddPayload = {
   id: number;

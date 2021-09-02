@@ -10,3 +10,4 @@ export {
 } from './Type';
 export { WIDTH } from './Width';
 export { newDate } from './Date';
+export { baseURL } from './BaseURL';
